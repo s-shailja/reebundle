@@ -1,12 +1,6 @@
-import pytest
-import numpy as np
 import nibabel as nib
 import networkx as nx
-import matplotlib.pyplot as plt
 import reebundle.construct as rc
-from mpl_toolkits.mplot3d import Axes3D
-import reebundle.visualization as vis
-import reebundle.distance as sn
 
 def test_rg_nodes_edges():
     eps = 2.5
