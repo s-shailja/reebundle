@@ -4,12 +4,15 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "reebundle"
-version = "0.1.1"
+version = "0.1.2"
 description = "A package for creating Reeb graphs for diffusion MRI tractography"
 authors = [
     { name="S Shailja"},
     { name="V. Bhagavatula"},
-    { name="M. Cieslak"}
+    { name="M. Cieslak"},
+    { name="J. M. Vettel,"},
+    { name="S. T. Grafton"},
+    { name="B. S. Manjunath"}
 ]
 readme = "README.md"
 requires-python = ">=3.8"
