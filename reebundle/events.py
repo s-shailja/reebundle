@@ -15,6 +15,29 @@ def checkEpsilonDistance(p1, p2, eps):
 	return (np.sqrt((p1[0] - p2[0])**2 + (p1[1] - p2[1])**2 + (p1[2] - p2[2])**2)) <= eps
 
 def findConnectDisconnectEvents(t1_id, t2_id, t1, t2, eps):
+	"""
+	Finds the connect and disconnect events between two trajectories
+	
+	Parameters:
+	-----------
+	t1_id: str
+		The id of the first trajectory
+	t2_id: str
+		The id of the second trajectory
+	t1: list
+		The first trajectory
+	t2: list
+		The second trajectory
+	eps: float
+		The epsilon value
+	
+	Returns:
+	--------
+	dic_t1: dict
+		The dictionary of events for the first trajectory
+	dic_t2: dict
+		The dictionary of events for the second trajectory
+	"""
 	dic_t1 = {}
 	dic_t2 = {}
 	ti = 0
