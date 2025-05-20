@@ -5,18 +5,20 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "reebundle"
 version = "0.1.1"
-description = "A package for working with Reeb graphs."
+description = "A package for creating Reeb graphs for diffusion MRI tractography"
 authors = [
-    { name="S Shailja", email="shailjasah12@gmail.com" }
+    { name="S Shailja"},
+    { name="V. Bhagavatula"},
+    { name="M. Cieslak"}
 ]
 readme = "README.md"
 requires-python = ">=3.8"
 license = { file = "LICENSE" }
 
 [project.urls]
-Homepage = "https://github.com/yourusername/reebundle"
-Documentation = "https://github.com/yourusername/reebundle#readme"
-Issues = "https://github.com/yourusername/reebundle/issues"
+Homepage = "https://github.com/s-shailja/reebundle"
+Documentation = "https://github.com/s-shailja/reebundle"
+Issues = "https://github.com/s-shailja/reebundle/issues"
 
 [project.optional-dependencies]
 test = [
