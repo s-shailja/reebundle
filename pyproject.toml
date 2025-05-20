@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "reebundle"
-version = "0.1.0"
+version = "0.1.1"
 description = "A package for working with Reeb graphs."
 authors = [
     { name="S Shailja", email="shailjasah12@gmail.com" }
