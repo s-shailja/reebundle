@@ -1,6 +1,6 @@
 [build-system]
-requires = ["setuptools>=61.0"]
-build-backend = "setuptools.build_meta"
+requires = ["maturin>=1.0,<2.0"]
+build-backend = "maturin"
 
 [project]
 name = "reebundle"
@@ -17,6 +17,17 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.8"
 license = { file = "LICENSE" }
+dependencies = [
+    "dipy",
+    "plotly",
+    "matplotlib",
+    "networkx",
+    "nibabel",
+    "numpy",
+    "pandas",
+    "seaborn",
+    "jupyterlab"
+]
 
 [project.urls]
 Homepage = "https://github.com/s-shailja/reebundle"
@@ -27,6 +38,16 @@ Issues = "https://github.com/s-shailja/reebundle/issues"
 test = [
   "pytest"
 ]
+dev = [
+  "pytest",
+  "maturin>=1.0,<2.0"
+]
+
+[tool.maturin]
+python-source = "."
+features = ["pyo3/extension-module"]
+module-name = "reebundle.rust"
+binding = "pyo3"
 
 [tool.flake8]
 max-line-length = 88
