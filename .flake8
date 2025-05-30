@@ -1,0 +1,4 @@
+[flake8]
+ignore = E,W
+max-line-length = 120
+select = N801,N802,N803,N806,F
