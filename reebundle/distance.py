@@ -293,7 +293,7 @@ def distance(
 
         raw_wt_diff = abs(ref_data["weight"] - wt)
         raw_dist_diff = abs(ref_data["distance"] - edist)
-        if  raw_wt_diff > (delta / len(gref.edges)):
+        if raw_wt_diff > (delta / len(gref.edges)):
             edge_weight_score += raw_wt_diff
         else:
             edge_weight_score += 0
