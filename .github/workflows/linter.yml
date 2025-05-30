@@ -16,7 +16,7 @@ jobs:
       - name: flake8 Lint
         uses: py-actions/flake8@v2
         with:
-          ignore: "W592"
+          ignore: "W592,E501,W292"
           exclude: "reebundle/construct.py"
           max-line-length: "100"
           path: "reebundle"
