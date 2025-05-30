@@ -19,5 +19,4 @@ jobs:
           ignore: "E501 W292 W503 F401"
           exclude: "reebundle/construct.py"
           max-line-length: "100"
-          path: "."
           plugins: "flake8-black"
