@@ -1,7 +1,6 @@
 import numpy as np
 import networkx as nx
-from .events import Event, findConnectDisconnectEvents
-from .rust import find_connect_disconnect_events
+from .events import *
 from dipy.segment.clustering import QuickBundles
 from dipy.segment.featurespeed import ResampleFeature
 from dipy.segment.metric import AveragePointwiseEuclideanMetric
@@ -58,7 +57,7 @@ def constructRobustReeb(streamlines, eps, alpha, delta):
 
     for i in range(len(streamlines)):    
         for j in range(i+1,len(streamlines)):
-            dic_t1, dic_t2 = find_connect_disconnect_events(i, j, streamlines[i], streamlines[j], eps)        
+            dic_t1, dic_t2 = findConnectDisconnectEvents(i, j, streamlines[i], streamlines[j], eps)        
             for key in dic_t1.keys():
                 if dic_T[i].get(key):
                     for e in dic_t1[key]:
