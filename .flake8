@@ -1,4 +1,6 @@
 [flake8]
-ignore = E,W
+ignore = E225,E251,E128,E302,E501,W291,W292,W293,
+         W391,F401,F403,F405,E402,E501,E722,W503,W504,
+         E203,E231,E741,E741,W605,W606,W607,W608,W609
+exclude = .git,__pycache__,build,dist
 max-line-length = 120
-select = N801,N802,N803,N806,F
