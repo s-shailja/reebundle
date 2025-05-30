@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import networkx as nx
-from mpl_toolkits.mplot3d import Axes3D
 from mpl_toolkits.mplot3d.art3d import Line3DCollection
 from mpl_toolkits.mplot3d import Axes3D
 from mpl_toolkits.mplot3d import proj3d
@@ -77,15 +76,9 @@ def plot_reeb_graph_3d(G, node_loc, streamlines):
         The Reeb graph to plot.
     """
     # Extract node and edge positions from the layout
-    node_xyz = np.array([node_loc[v] for v in sorted(G)])
-    edge_xyz = np.array([(node_loc[u], node_loc[v]) for u, v in G.edges()])
     edge_labels = nx.get_edge_attributes(G, "weight")
     weight_labels = list(edge_labels.values())
 
-    # 3d spring layout
-    pos = node_loc
-    node_xyz = np.array([pos[v] for v in sorted(G)])
-    edge_xyz = np.array([(pos[u], pos[v]) for u, v in G.edges()])
     edge_labels = nx.get_edge_attributes(G, "weight")
     # Separate X,Y,Z coordinates for Plotly
     x_nodes = [node_loc[i][0] for i in G.nodes()]

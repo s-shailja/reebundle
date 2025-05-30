@@ -19,7 +19,8 @@ def constructRobustReeb(streamlines, eps, alpha, delta):
     """
     Reeb Graph Computation
     Input: Streamline file and the parameters
-    Output: Reeb Graph and Node location map assigning 3D coordinates to each node in the Reeb graph
+    Output: Reeb Graph and Node location map assigning
+    3D coordinates to each node in the Reeb graph
     """
     cluster_map = {}
     threshold = 1.5
@@ -49,7 +50,8 @@ def constructRobustReeb(streamlines, eps, alpha, delta):
     stream_list = []
     # print(len(streamlines), stream_list)
     # When to stop? 1.All points are processed, in other words all (len(), True/False)
-    # Will it reach a point where all entries are (-,False) ->solution increase any random
+    # Will it reach a point where all entries are (-,False)
+    #  ->solution increase any random
     assign_cluster = []
     for stream_i in range(len(streamlines)):
         stream_list.append(
@@ -63,7 +65,8 @@ def constructRobustReeb(streamlines, eps, alpha, delta):
     dic_T = {}  # to store all events at each points
 
     for i in range(len(streamlines)):
-        dic_T[i] = {0: [Event("appear")], len(streamlines[i]) - 1: [Event("disappear")]}
+        dic_T[i] = {0: [Event("appear")], 
+                    len(streamlines[i]) - 1: [Event("disappear")]}
 
     for i in range(len(streamlines)):
         for j in range(i + 1, len(streamlines)):
@@ -99,11 +102,9 @@ def constructRobustReeb(streamlines, eps, alpha, delta):
                 for e in events:
                     if e.event == "connect" and stream_list[e.trajectory][0] < e.t:
                         stream_list[stream_i][1] = False
-                        #                     print("connect", stream_i,stream_list[e.trajectory][0], e.t)
                         break
                     elif e.event == "disconnect" and stream_list[e.trajectory][0] < e.t:
                         stream_list[stream_i][1] = False
-                        #                     print("disconnect", stream_i,stream_list[e.trajectory][0], e.t)
                         break
         # process all eligible trajectories
         #     print("test", stream_list)
@@ -132,7 +133,7 @@ def constructRobustReeb(streamlines, eps, alpha, delta):
                         elif e.event == "disconnect":
                             try:
                                 G_pres.remove_edge(stream_i, e.trajectory)
-                            except:
+                            except Exception:
                                 pass
                         elif e.event == "disappear":
                             del_nodes.append(stream_i)
@@ -362,7 +363,7 @@ def constructRobustReeb(streamlines, eps, alpha, delta):
         if len(cluster) > 1:
             for c in cluster:
                 node_map[c] = node_id
-                if not node_id in node_loc_final:
+                if node_id not in node_loc_final:
                     node_loc_final[node_id] = node_loc_final[c]
                 else:
                     node_loc_final[node_id] = [

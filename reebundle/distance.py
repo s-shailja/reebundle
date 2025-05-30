@@ -8,9 +8,16 @@ from copy import deepcopy
 from functools import wraps
 from functools import partial
 
-# The `my_scoring_fn` function provides flexibility in defining how the distance between two Reeb graphs is quantified. By customizing this function, you can choose which aspects of the graph (such as node scores, edge weights, or edge distances) are most relevant for your analysis.
-# In this workflow, we use the normalized `node_score` as the scoring function. This approach quantifies the topological difference between the bundle tracts by comparing the nodes of the graphs and normalizing by the number of nodes in the reference graph.
-# This method allows for a tailored comparison that can be adapted to different research questions or datasets by modifying the scoring function as needed.
+# The `my_scoring_fn` function provides flexibility in defining how the distance 
+# between two Reeb graphs is quantified. By customizing this function, you can
+#  choose which aspects of the graph (such as node scores, edge weights, or
+#  edge distances) are most relevant for your analysis.
+# In this workflow, we use the normalized `node_score` as the scoring function. 
+# This approach quantifies the topological difference between the bundle tracts by 
+# comparing the nodes of the graphs and normalizing by the number of nodes in the 
+# reference graph.
+# This method allows for a tailored comparison that can be adapted to different 
+# research questions or datasets by modifying the scoring function as needed.
 
 
 def my_scoring_fn(
@@ -30,9 +37,10 @@ def annotate_graph(graph, node_positions):
 
 def merge_equivalent(graph, node_annotations):
     """
-    Intakes a graph and its associated node annotations where some nodes may have the same annotation (spatial position).
-    Those equivalent nodes will be merged into the same node, and edges involving these equivalent nodes will be inherited
-    by the final node.
+    Intakes a graph and its associated node annotations where some nodes may have the same
+      annotation (spatial position).
+    Those equivalent nodes will be merged into the same node, and edges involving these 
+    equivalent nodes will be inherited by the final node.
     """
 
     equivalences = dict()
@@ -71,8 +79,8 @@ def max_cost_score(
 ):
     """
     Scoring function that normalizes the sum of the node score and edge score with
-    the maximum possible such score  -- which is the sum of maximum insertion cost and maximum deletion cost
-    for both nodes and edges.
+    the maximum possible such score  -- which is the sum of maximum insertion cost and 
+    maximum deletion cost for both nodes and edges.
     """
     # print(max_cost_score.__name__)
     sub_rad = 2 * eps
@@ -139,26 +147,30 @@ def distance(
     ins_cost=None,
 ):
     """
-    Intakes two graphs, gcmp and gref, and computes the node and edge distances b/w them as per the Siminet algorithm.
-    The graph is expected to be labeled, with the nodes having an attribute 'position' (corresponds to spatial position)
-    and the edges having an attribute 'weight'. The computed node and edge distances, as well as the two graphs,
-    will be given to a scoring function, which will (usually) yield some scalar -- this will be returned as the final result.
+    Intakes two graphs, gcmp and gref, and computes the node and edge distances b/w them 
+    as per the Siminet algorithm.
+    The graph is expected to be labeled, with the nodes having an attribute 'position' 
+    (corresponds to spatial position)
+    and the edges having an attribute 'weight'. The computed node and edge distances, 
+    as well as the two graphs,
+    will be given to a scoring function, which will (usually) yield some scalar -- 
+    this will be returned as the final result.
 
-    The scoring function is a function which intakes the node score, the edge score, the comparision graph (gcmp)
-    and the reference graph (gref). If scoring_func is set to None, then the returned value is a tuple of the node score and edge score.
+    The scoring function is a function which intakes the node score, the edge score, 
+    the comparision graph (gcmp)
+    and the reference graph (gref). If scoring_func is set to None, then the returned
+      value is a tuple of the node score and edge score.
 
-    The transform boolean flag will transform a copy of gcmp during the course of the function if set to true
+    The transform boolean flag will transform a copy of gcmp during the course of the 
+    function if set to true
     (for testing purposes).
     """
 
     if (
         scoring_func is None
     ):  # scoring function, using the node/edge scores and the two graphs
-        scoring_func = lambda n, ew, ed, gc, gr, eps, alpha, delta: (
-            n,
-            ew,
-            ed,
-        )  # default just returns back the node and edge scores
+        def scoring_func(n, ew, ed, *args, **kwargs):
+            return n, ew, ed  # default just returns back the node and edge scores
 
     if sub_rad is None:
         sub_rad = 2 * eps
@@ -171,9 +183,8 @@ def distance(
     if transform:
         copy = deepcopy(gcmp)  # ensures that we don't mutate what was passed in
 
-    dist = lambda p, q: np.linalg.norm(
-        p[1]["position"] - q[1]["position"]
-    )  # compute the Euclidean distance b/w nodes
+    def dist(p, q):
+        return np.linalg.norm(p[1]["position"] - q[1]["position"])  # compute the Euclidean distance b/w nodes
 
     equivalency_mapping = (
         dict()
@@ -193,20 +204,18 @@ def distance(
     }
 
     avg_del_dist = 0
-    distances = []
 
-    valid_cand = (
-        lambda nde: nde[0] not in counterpart_nodes
-    )  # condition to ensure that candidate node is new, hasn't been seen before
-
+    def valid_cand(nde):
+        return nde[0] not in counterpart_nodes  
+    # condition to ensure that candidate node is new, hasn't been seen before
     # NODE SCORE
-
     gcmp_attrs_sorted = sorted(gcmp.nodes(data=True), key=lambda n: n[0])
     gref_attrs_sorted = sorted(gref.nodes(data=True), key=lambda n: n[0])
 
     for n in gcmp_attrs_sorted:
 
-        # valid_cand = lambda nde: nde[0] not in counterpart_nodes # condition to ensure that candidate node is new, hasn't been seen before
+        # valid_cand = lambda nde: nde[0] not in counterpart_nodes # condition to ensure that 
+        # candidate node is new, hasn't been seen before
         closest = min(
             filter(valid_cand, gref_attrs_sorted),
             key=lambda m: dist(m, n),
