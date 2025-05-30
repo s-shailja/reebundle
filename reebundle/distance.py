@@ -2,8 +2,8 @@
 
 # Implementation of Siminet algorithm in Python
 
-import networkx as nx
-import numpy as np
+import networkx as nx #type: ignore
+import numpy as np #type: ignore
 from copy import deepcopy
 from functools import wraps
 from functools import partial
