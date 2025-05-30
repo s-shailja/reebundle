@@ -169,7 +169,7 @@ def distance(
     if (
         scoring_func is None
     ):  # scoring function, using the node/edge scores and the two graphs
-        def scoring_func(n, ew, ed, *args, **kwargs):
+        def scoring_func(n, ew, ed):
             return n, ew, ed  # default just returns back the node and edge scores
 
     if sub_rad is None:
