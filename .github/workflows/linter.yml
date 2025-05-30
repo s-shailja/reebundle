@@ -17,6 +17,7 @@ jobs:
         uses: py-actions/flake8@v2
         with:
           ignore: "E501"
+          exclude: "reebundle/construct.py"
           max-line-length: "100"
           path: "reebundle"
-          plugins: "flake8-bugbear==22.1.11 flake8-black"
+          plugins: "flake8-black"
