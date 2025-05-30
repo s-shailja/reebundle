@@ -165,13 +165,6 @@ def distance(
     function if set to true
     (for testing purposes).
     """
-
-    if (
-        scoring_func is None
-    ):  # scoring function, using the node/edge scores and the two graphs
-        def scoring_func(n, ew, ed):
-            return n, ew, ed  # default just returns back the node and edge scores
-
     if sub_rad is None:
         sub_rad = 2 * eps
         # sub_rad = 5*eps
@@ -300,10 +293,10 @@ def distance(
 
         raw_wt_diff = abs(ref_data["weight"] - wt)
         raw_dist_diff = abs(ref_data["distance"] - edist)
-
-        edge_weight_score += (
-            raw_wt_diff if raw_wt_diff > (delta / len(gref.edges)) else 0
-        )
+        if  raw_wt_diff > (delta / len(gref.edges)):
+            edge_weight_score += raw_wt_diff
+        else:
+            edge_weight_score += 0
         edge_dist_score += raw_dist_diff if raw_dist_diff > alpha else 0
 
         if (

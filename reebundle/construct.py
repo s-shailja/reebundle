@@ -151,17 +151,14 @@ def constructRobustReeb(streamlines, eps, alpha, delta):
                         ] = cluster_id
 
             else:
-                for cluster_traj in cluster_pres:
+                for c_tj in cluster_pres:
                     if (
-                        stream_list[cluster_traj][0] < len(streamlines[cluster_traj])
-                        and assign_cluster[cluster_traj][stream_list[cluster_traj][0]]
+                        stream_list[c_tj][0] < len(streamlines[c_tj])
+                        and assign_cluster[c_tj][stream_list[c_tj][0]]
                         == -1
                     ):
-                        assign_cluster[cluster_traj][stream_list[cluster_traj][0]] = (
-                            assign_cluster[cluster_traj][
-                                stream_list[cluster_traj][0] - 1
-                            ]
-                        )
+                        assign_cluster[c_tj][stream_list[c_tj][0]] = assign_cluster[c_tj][
+                                stream_list[c_tj][0] - 1]
 
         # prepare for next iteration
         for stream_i in range(len(streamlines)):
