@@ -65,8 +65,8 @@ def constructRobustReeb(streamlines, eps, alpha, delta):
     dic_T = {}  # to store all events at each points
 
     for i in range(len(streamlines)):
-        dic_T[i] = {0: [Event("appear")], 
-                    len(streamlines[i]) - 1: [Event("disappear")]}
+        dic_T[i] = {0: [Event("appear")],
+                len(streamlines[i]) - 1: [Event("disappear")]}
 
     for i in range(len(streamlines)):
         for j in range(i + 1, len(streamlines)):
