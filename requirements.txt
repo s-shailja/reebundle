@@ -1,0 +1,10 @@
+dipy
+plotly
+matplotlib
+networkx
+nibabel
+numpy
+pandas
+seaborn
+jupyterlab
+nibabel
